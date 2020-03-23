@@ -22,17 +22,15 @@ This removes the necessity to just open a console/ssh to just view basic informa
 ### Prerequisites
 What things you need to run the program:
 - A web server preferably Apache2 and PHP.
-
 - Install the following from APT package manager:
-  
 - ```bash
   sudo apt update
   sudo apt upgrade
   sudo apt install apache2
   sudo apt install php php-mbstring
   ```
-  
   - For detailed instructed on setting up [Apache2 and PHP](https://howtoraspberrypi.com/how-to-install-web-server-raspberry-pi-lamp/)
+
 
 ## Features
 * Displays the following System Information:
@@ -47,6 +45,7 @@ What things you need to run the program:
 	- Local IP Address
 * Ability to pin sites
 
+
 ### Screenshot
 ```bash
 Tested on Raspberry Pi 4, running 
@@ -54,8 +53,6 @@ PHP Version 7.3.14-1~deb10u1 on Apache/2.4.38 (Raspbian)
 ```
 
 <img src="http://cdn.thekrishna.in/img/common/rpilanding.gif" width="750"/>
-
-
 
 
 ## Acknowledgments
