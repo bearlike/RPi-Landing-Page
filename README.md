@@ -50,10 +50,12 @@ What things you need to run the program:
 ### Screenshot
 ```bash
 Tested on Raspberry Pi 4, running 
-PHP Version	7.3.14-1~deb10u1 on Apache/2.4.38 (Raspbian)
+PHP Version 7.3.14-1~deb10u1 on Apache/2.4.38 (Raspbian)
 ```
 
-![wave](http://cdn.thekrishna.in/img/common/rpilanding.gif)
+<img src="http://cdn.thekrishna.in/img/common/rpilanding.gif" width="750"/>
+
+
 
 
 ## Acknowledgments
