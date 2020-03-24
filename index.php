@@ -8,6 +8,7 @@
     <html>
 
     <head>
+        <!-- all assets made local to boost loading times !-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link rel="icon" href="assets/img/logorpi.ico">
@@ -20,7 +21,7 @@
         <link rel="stylesheet" href="assets/css/custom.css">
         <!-- set hostname as page title !-->
         <?php
-        $hostname_ = exec("hostname");;
+            $hostname_ = exec("hostname");;
         ?>
         <title>::<?php echo "$hostname_";?>::</title>
     </head>
@@ -28,11 +29,13 @@
     <body>
         <!-- php grab local IP !-->
         <?php
-        $localIP = $_SERVER['SERVER_ADDR'];
+            $localIP = $_SERVER['SERVER_ADDR'];
         ?>
         <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
             <div class="container"><a class="navbar-brand" href="#">Welcome to <?php echo "$hostname_";?><br></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-                <div class="collapse navbar-collapse" id="navcol-1"></div>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <a class="btn btn-primary ml-auto" role="button" href="#">Advanced Settings</a>
+                </div>
             </div>
         </nav>
         <section class="features-icons bg-light text-center" style="height: 304px;padding: 40px;padding-right: 60px;padding-left: 60px;padding-top: 10px;padding-bottom: 40px;">
@@ -72,11 +75,12 @@
         <section class="showcase">
             <div class="container-fluid p-0">
                 <div class="row no-gutters">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;assets/img/bg-showcase-1.jpg&quot;);"><span></span><img src="assets/img/bg-showcase-rpi.jpg" style="width: 728px;"></div>
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image:url(&quot;assets/img/bg-showcase-rpi.jpg&quot;);"><span></span></div>
                     <div class="col-lg-6 my-auto order-lg-1 showcase-text" style="height: 485px;">
                         <h2 style="margin-top: -70px;margin-bottom: 10px;">System Information</h2>
                         <!-- php functions !-->
                         <?php
+                            // display system uptime
                             function UPTIME(){
                                 $upSeconds = exec("/usr/bin/cut -d. -f1 /proc/uptime");
                                 $secs=$upSeconds%60;
@@ -90,6 +94,7 @@
                                     echo "$hours <strong>hrs.</strong> $mins <strong>min.</strong> $secs <strong>sec.</strong>";
                                 }
                             }
+                            // display memory usage with right color range and icons
                             function MEMORY($opt){
                                 $freemem = exec("cat /proc/meminfo | grep MemFree | awk {'print $2/1024'}");
                                 $totmem = exec("cat /proc/meminfo | grep MemTotal | awk {'print $2/1024'}");
@@ -100,16 +105,19 @@
                                     //$perc=80; // Block
                                     //$perc=50; // Warning
                                     echo "$freemem <strong>MB</strong> ";
-                                    if ($perc<45){
+                                    /* Range: Green */
+                                    if ($perc>45){
                                         echo "<b style=\"color:DarkGreen;\">";
                                         echo "($perc %)&nbsp;&nbsp;</b>";
                                         echo "<i style=\"color:DarkGreen;\" class=\"fas fa-check-circle\"></i>";
                                     }
-                                    else if ($perc<70){
+                                    // Range: Orange
+                                    else if ($perc<30){
                                         echo "<b style=\"color:DarkOrange;\">";
                                         echo "($perc %)&nbsp;&nbsp;</b>";
                                         echo "<i style=\"color:DarkOrange;\" class=\"fas fa-warning\"></i>";
                                     }
+                                    // Range: Red
                                     else {
                                         echo "<b style=\"color:DarkRed;\">";
                                         echo "($perc %)&nbsp;&nbsp;</b>";
@@ -120,23 +128,26 @@
                                     echo "$totmem <strong>MB</strong>";
                                 }
                             }
-
+                            // display temperature with right color range and icons
                             function TEMP(){
                                 $temp = floor(exec("cat /sys/class/thermal/thermal_zone0/temp")/1000);
                                 // For development testing, uncomment to see changes
                                 //$perc=40; // Right
                                 //$perc=49; // Block
                                 //$perc=80; // Warning
+                                /* Range: Green */
                                 if ($temp<45){
                                     echo "<b style=\"color:DarkBlue;\">";
                                     echo "$temp oC  </b>&nbsp;&nbsp;";
                                     echo "<i style=\"color:DarkBlue;\" class=\"fas fa-temperature-low\"></i>";
                                 }
+                                // Range: Orange
                                 else if ($temp<50){
                                     echo "<b style=\"color:DarkOrange;\">";
                                     echo "$temp oC </b>&nbsp;&nbsp;";
                                     echo "<i style=\"color:DarkOrange;\" class=\"fas fa-temperature-high\"></i>";
                                 }
+                                // Range: Red
                                 else {
                                     echo "<b style=\"color:DarkRed;\">";
                                     echo "$temp oC </b>&nbsp;&nbsp;";
@@ -145,17 +156,16 @@
                                 }
                             }
                         ?>
-
                         <p class="lead mb-0"><?php system("date +'%A, %d %h %Y, %l:%M:%S %p'") ?><br>
                         <?php system("uname -srmo"); ?><br>
-                        <br>- <strong>Uptime</strong>:&nbsp; <?php UPTIME(); ?>
-                        <br>- <strong>Free Memory</strong>: <?php MEMORY(1); ?>
+                        <br>-&nbsp;<strong>Uptime</strong>:&nbsp; <?php UPTIME(); ?>
+                        <br>-&nbsp;<strong>Free Memory</strong>:&nbsp; <?php MEMORY(1); ?>
                         <br>-&nbsp;<strong>Total Memory</strong>:&nbsp; <?php MEMORY(2); ?>
                         <br>-&nbsp;<strong>CPU Temperature</strong>:&nbsp; <?php TEMP(); ?>
-                        <br>- <strong>Running Processes</strong>:&nbsp; <?php system("ps ax | wc -l | tr -d \" \""); ?>
-                        <br>- <strong>Connected Network </strong>:&nbsp; <?php system("iwgetid -r"); ?>
-                        <br>- <strong>IP Address</strong>:&nbsp; <?php echo "$localIP" ?></p>
-                        <br> <button class="btn btn-primary" type="button" onClick="window.location.reload()">Refresh Values</button>
+                        <br>-&nbsp;<strong>Running Processes</strong>:&nbsp; <?php system("ps ax | wc -l | tr -d \" \""); ?>
+                        <br>-&nbsp;<strong>Connected Network </strong>:&nbsp; <?php system("iwgetid -r"); ?>
+                        <br>-&nbsp;<strong>IP Address</strong>:&nbsp; <?php echo "$localIP" ?></p>
+                        <br> <button class="btn btn-primary" type="button" onClick="window.location.reload()">Refresh Values&nbsp;&nbsp;&nbsp;<i class="fa fa-refresh"></i></button>
                     </div>
                 </div>
             </div>
