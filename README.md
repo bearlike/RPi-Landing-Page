@@ -1,20 +1,28 @@
 <h1 align="center">
   <br>
-  RPi-Landing-Page
+  Raspberry Pi Landing Page
   <br>
 </h1>
 
 <h4 align="center">A Landing page that displays system information for you Raspberry Pi and pin your favorite local pages/apps.</h4>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/github/last-commit/K-Kraken/RPi-Landing-Page.svg"></a>
-  <a href="/LICENSE"><img src="https://img.shields.io/github/license/K-Kraken/RPi-Landing-Page.svg?color=blue"></a>
+  <a href="#"><img src="https://img.shields.io/github/last-commit/bearlike/RPi-Landing-Page.svg"></a>
+  <a href="/LICENSE"><img src="https://img.shields.io/github/license/bearlike/RPi-Landing-Page.svg?color=blue"></a>
 </p>
 
 
 
 ### Why do I do it?
-This removes the necessity to just open a console/ssh to just view basic information such as Local IP, Uptime etc.
+This removes the necessity to just open a console/ssh to just view basic information such as Local IP, Uptime etc. This also easily gives me easy redirect access to other hosted applications.
+
+### Screenshot
+```bash
+Tested on Raspberry Pi 4, running 
+PHP Version 7.3.14-1~deb10u1 on Apache/2.4.38 (Raspbian)
+```
+
+<img src="http://cdn.thekrishna.in/img/common/rpilanding.gif" width="750"/>
 
 
 ## Getting Started
@@ -46,22 +54,13 @@ What things you need to run the program:
 * Ability to pin sites
 
 
-### Screenshot
-```bash
-Tested on Raspberry Pi 4, running 
-PHP Version 7.3.14-1~deb10u1 on Apache/2.4.38 (Raspbian)
-```
-
-<img src="http://cdn.thekrishna.in/img/common/rpilanding.gif" width="750"/>
-
-
 ## Acknowledgments
 * Hat tip to anyone whose code was used.
 * Raspberry Pi itself
 
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/K-Kraken">K-Kraken</a>
+  Made with ❤️ by <a href="https://github.com/bearlike">bearlike</a>
 </p>
 
 ![wave](http://cdn.thekrishna.in/img/common/border.png)
